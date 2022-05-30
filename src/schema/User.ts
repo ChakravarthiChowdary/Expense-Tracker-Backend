@@ -7,6 +7,7 @@ interface IUser extends Document {
   password: string;
   photoUrl: string;
   netIncome: string;
+  savingsPercentage: string;
 }
 
 const uniqueValidator: any = uniqueValidatorPkg;
@@ -17,6 +18,7 @@ const UserSchema: Schema<IUser> = new Schema({
   password: { type: String, required: true, minLength: 6 },
   photoUrl: { type: String, required: false },
   netIncome: { type: String, required: true },
+  savingsPercentage: { type: String, required: true },
 });
 
 UserSchema.plugin(uniqueValidator);

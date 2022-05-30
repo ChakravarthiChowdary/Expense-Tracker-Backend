@@ -1,6 +1,12 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { signInUser, signUpUser } from "../controllers/auth";
+import {
+  signInUser,
+  signUpUser,
+  updateIncomeInfo,
+  updateProfile,
+  updateProfilePhoto,
+} from "../controllers/auth";
 
 const router = Router();
 
@@ -35,5 +41,38 @@ router.post(
   ],
   signInUser
 );
+
+router.patch(
+  "/updateProfile",
+  [
+    check("username").not().isEmpty().withMessage("Username must not be blank"),
+    check("passwordUpdated")
+      .not()
+      .isEmpty()
+      .withMessage("Password updated filed must not be blank"),
+  ],
+  updateProfile
+);
+
+router.patch(
+  "/updateIncomeInfo",
+  [
+    check("userId")
+      .not()
+      .isEmpty()
+      .withMessage("User id should be part of body."),
+    check("netIncome")
+      .not()
+      .isEmpty()
+      .withMessage("Net income should be part of body."),
+    check("savingsPercentage")
+      .not()
+      .isEmpty()
+      .withMessage("Savings percentage should be part of body."),
+  ],
+  updateIncomeInfo
+);
+
+router.post("/uploadProfilePic", updateProfilePhoto);
 
 export default router;
