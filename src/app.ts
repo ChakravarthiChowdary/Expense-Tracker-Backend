@@ -45,15 +45,12 @@ app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
 });
 
 mongoose
-  .connect(
-    `mongodb+srv://chakri:chakri@cluster0.pkkrb.mongodb.net/expensetracker?retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
-    }
-  )
+  .connect(`your mongodb url`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   .then(() => {
     app.listen(port, () => {
       console.log(`Server started at port ${port}`);
